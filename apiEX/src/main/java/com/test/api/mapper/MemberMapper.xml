@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.test.api.mapper.MemberMapper">
+
+	<insert id="insertMember" parameterType="com.test.api.model.MemberDTO">
+		INSERT INTO member(memberPw,memberName,memberAddress,memberEmail,memberTel,memberType) 
+		VALUES(#{memberPw},#{memberName},#{memberAddress},#{memberEmail},#{memberTel},#{memberType})
+	</insert>
+	
+  <!-- mapper.xml의 id와 mapper 인터페이스의 메서드 명을 맞춰야 매핑 -->
+  <!-- reusltType 반환 타입을 의미 -->
+  	<select id="isMem" resultType="int">
+  		SELECT COUNT(*) FROM member WHERE memberEmail = #{kakaoEmail}
+  	</select>
+  	
+  	<select id="emailPwCheck" resultType="String">
+		SELECT memberPw FROM member WHERE memberEmail = #{email}
+	</select>
+	
+	<select id ="waitforexpertList" resultType="com.test.api.model.WaitForExpertDTO">
+		SELECT * FROM waitforexpert ORDER BY created_at
+	</select>	
+	
+	<insert id="uploadFile" parameterType="com.test.api.model.WaitForExpertDTO">
+		INSERT INTO waitforexpert(memberNum,memberName,fileName,fileType,uniqueName)
+		VALUES(#{memberNum},#{memberName},#{fileName},#{fileType},#{uniqueName})
+	</insert>
+  </mapper>
+  
+  

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.test.api.mapper.MypharmMapper">
+
+	
+  <!-- mapper.xml의 id와 mapper 인터페이스의 메서드 명을 맞춰야 매핑 -->
+  <!-- reusltType 반환 타입을 의미 -->
+  	<select id="getNameMedicine" resultType="com.test.api.model.MypharmDTO">
+  		SELECT * FROM pharmacy WHERE itemName LIKE CONCAT('%', #{itemName}, '%')
+  	</select>
+  	
+  	<insert id="addPharmByID" parameterType="com.test.api.model.MypharmDTO" >
+  			INSERT INTO pharmacy(itemSeq,itemName,entpName,dueDate,amount,memberNum)	
+  			VALUES(#{itemSeq},#{itemName},#{entpName},#{dueDate},#{amount},#{memberNum})
+  	</insert>
+  	
+  	<select id="modMedi" parameterType="int" resultType="com.test.api.model.MypharmDTO">
+        SELECT * FROM pharmacy WHERE itemSeq = #{itemSeq} AND memberNum = #{memberNum}
+    </select>
+	
+	<update id="modMediInfo">
+		UPDATE pharmacy 
+		SET dueDate= #{dueDate}, 
+			amount = #{amount} 
+			WHERE mediID = #{mediID}
+	</update>
+	
+	<delete id="delPharmByID" >
+		DELETE FROM pharmacy WHERE mediID = #{mediID}
+	</delete>
+	
+	<update id="addAmount">
+		UPDATE pharmacy SET amount = amount+#{amount} WHERE itemSeq=#{itemSeq}
+	</update>
+	
+	<update id="subtractMed">
+		UPDATE pharmacy SET amount = amount-#{tot} WHERE mediID = #{mid}
+	</update>
+	
+	<select id="dueMedList" resultType="com.test.api.model.MypharmDTO">
+		SELECT * FROM pharmacy WHERE memberNum = #{memberNum} AND (dueDate BETWEEN CURDATE() AND CURDATE() + INTERVAL 30 DAY)
+	</select>
+  </mapper>
+  
+  

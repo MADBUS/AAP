@@ -1,5 +1,5 @@
 # 약국 유통기한 임박 자동 알림 사이트 AAP (AutoAlertPharm)
-
+https://www.youtube.com/watch?v=3SfG-X87CH4&t=3s
 ## 프로젝트 개요
 
 ### 수행 기간

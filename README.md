@@ -1,5 +1,7 @@
 # 💊 AAP (AutoAlertPharm)
 
+시연영상링크 : https://www.youtube.com/watch?v=3SfG-X87CH4&t=3s
+
 <div align="center">
 
 ### 약국 유통기한 임박 자동 알림 시스템
